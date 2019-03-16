@@ -74,7 +74,7 @@ Cell[BoxData[
  InitializationCell->
   True,ExpressionUUID->"ac44aa9d-1eed-401b-86e5-fd78cdf4c3f0"]
 }, Open  ]]
-}, Closed]],
+}, Open  ]],
 
 Cell[CellGroupData[{
 
@@ -100,7 +100,7 @@ tomography of bichromatic fields. https://github.com/episanty/LIRE (2019).\n  \
   \nIf you wish to include a DOI in your citation, please use one of the \
 numbered-version releases."
 }], "Text",ExpressionUUID->"e4dc8b2a-3f71-489d-9066-76331a14d173"]
-}, Closed]]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -110,12 +110,7 @@ Cell["Implementation", \
 
 Cell[CellGroupData[{
 
-Cell["Supporting functions", \
-"Section",ExpressionUUID->"13cfeb3a-3081-43d8-990e-d19965c81e1f"],
-
-Cell[CellGroupData[{
-
-Cell["Initialization", \
+Cell["Initialization and package infrastructure", \
 "Subsection",ExpressionUUID->"577dcd29-2522-4f35-8241-66fdaeaf85c3"],
 
 Cell[BoxData[
@@ -239,13 +234,13 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], "\n", 
  RowBox[{
-  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 00:19:21\>\""}], 
+  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 00:41:52\>\""}], 
   ";"}], "\n", 
  RowBox[{
   RowBox[{"End", "[", "]"}], ";"}]}], "Input",
  InitializationCell->True,
  CellTags->
-  "version-timestamp",ExpressionUUID->"6421c477-2d4b-4c25-a7ad-c255b20e6037"]
+  "version-timestamp",ExpressionUUID->"ec5594ae-9335-42ea-8994-b99959bae5cf"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -367,14 +362,595 @@ Cell[BoxData[{
 }, Closed]]
 }, Open  ]],
 
-Cell["Code", \
-"Subsection",ExpressionUUID->"f811dfa5-3e13-4c6b-9bea-88e7709dd1f7"]
-}, Open  ]],
+Cell[CellGroupData[{
+
+Cell["UnitE", \
+"Subsection",ExpressionUUID->"c5ed2ca0-9b26-48d2-bc4d-add57320a732"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnitE", "[", "1", "]"}], "=", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox["2"]], 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "\[ImaginaryI]"}], "}"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"UnitE", "[", 
+    RowBox[{"-", "1"}], "]"}], "=", 
+   RowBox[{
+    FractionBox["1", 
+     SqrtBox["2"]], 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "\[ImaginaryI]"}]}], "}"}]}]}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.7584798477225456`*^9, 3.7584798767577505`*^9}, {
+   3.758541690312573*^9, 3.758541693671682*^9}, 
+   3.758550221427224*^9},ExpressionUUID->"4a177859-4e6e-4aef-85fd-\
+a223127e7011"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["EnsureRightCircularFundamental", \
+"Subsection",ExpressionUUID->"06ad99ca-5841-4134-ba0f-b0c700289d49"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"EnsureRightCircularFundamental", "::", "usage"}], "=", 
+    "\"\<EnsureRightCircularFundamental[{E1p,E1m,E2p,E2m}] ensures that the \
+fundamental has right-circular polarization (i.e. |E1p|>|E1m|) by swapping \
+the input to \
+{E1m\[Conjugate],E1p\[Conjugate],E2m\[Conjugate],E2p\[Conjugate]} if \
+necessary.\>\""}], ";"}], " ", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EnsureRightCircularFundamental", "[", 
+   RowBox[{"{", 
+    RowBox[{"E1p_", ",", "E1m_", ",", "E2p_", ",", "E2m_"}], "}"}], "]"}], ":=", 
+  RowBox[{"If", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Abs", "[", "E1p", "]"}], ">", 
+     RowBox[{"Abs", "[", "E1m", "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"E1p", ",", "E1m", ",", "E2p", ",", "E2m"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"E1m", "\[Conjugate]"}], ",", 
+      RowBox[{"E1p", "\[Conjugate]"}], ",", 
+      RowBox[{"E2m", "\[Conjugate]"}], ",", 
+      RowBox[{"E2p", "\[Conjugate]"}]}], "}"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"bf9244d6-ef81-456c-9ee9-3dca72110bbb"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["PhaseNormalization", \
+"Subsection",ExpressionUUID->"41715a3c-7b33-4bb6-b0da-bd7cd12d77cb"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"PhaseNormalization", "::", "usage"}], "=", 
+    "\"\<PhaseNormalization[{E1p,E1m,E2p,E2m}] Normalizes the field phases so \
+that E1p is real and positive, by multiplying by an appropriate factor of \
+\!\(\*SuperscriptBox[\(\[ExponentialE]\), \(\(-\[ImaginaryI]\)\\\ \[Phi]\)]\) \
+on E1 and \!\(\*SuperscriptBox[\(\[ExponentialE]\), \(\(-2\) \[ImaginaryI]\\\ \
+\[Phi]\)]\) on E2.\>\""}], ";"}], " ", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PhaseNormalization", "[", 
+   RowBox[{"{", 
+    RowBox[{"E1p_", ",", "E1m_", ",", "E2p_", ",", "E2m_"}], "}"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\[Phi]", "=", 
+      RowBox[{"Arg", "[", "E1p", "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Chop", "[", 
+     RowBox[{"Times", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"-", "\[ImaginaryI]"}], " ", "\[Phi]"}]], ",", 
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"-", "\[ImaginaryI]"}], " ", "\[Phi]"}]], ",", 
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"-", "2"}], "\[ImaginaryI]", " ", "\[Phi]"}]], ",", 
+         SuperscriptBox["\[ExponentialE]", 
+          RowBox[{
+           RowBox[{"-", "2"}], "\[ImaginaryI]", " ", "\[Phi]"}]]}], "}"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"E1p", ",", "E1m", ",", "E2p", ",", "E2m"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], "]"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"1505263b-11ac-4f55-8a36-c3944116e46d"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["NLPTOutcomes", \
+"Subsection",ExpressionUUID->"4aa37455-9644-48b4-bd2f-16f009a170cf"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"NLPTOutcomes", "::", "usage"}], "=", 
+    "\"\<NLPTOutcomes[{ReE1p,ImE1p,ReE1m,ImE1m,ReE2p,ImE2p,ReE2m,ImE2m}] \
+Calculates the Nonlinear Polarization Tomography outcome functions \
+\!\(\*SubscriptBox[\(I\), \(n\)]\), as defined in the paper, with the \
+normalization set so that the \[ScriptL]>0 components of the paper are given \
+by \!\(\*SubsuperscriptBox[\(I\), \(\[ScriptL]\), \(paper\)]\)(\[Theta])=Re(2\
+\!\(\*SubscriptBox[\(I\), \(\[ScriptL]\)]\)\!\(\*SuperscriptBox[\(\
+\[ExponentialE]\), \(\[ImaginaryI]\\\ \[ScriptL]\\\ \[Theta]\)]\)).\n\n\
+NLPTOutcomes[{E1p,E1m,E2p,E2m}] Uses explicit complex amplitudes.\>\""}], 
+   ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"NLPTOutcomes", "[", 
+     RowBox[{"{", 
+      RowBox[{
+      "ReE1p_", ",", "ImE1p_", ",", "ReE1m_", ",", "ImE1m_", ",", "ReE2p_", 
+       ",", "ImE2p_", ",", "ReE2m_", ",", "ImE2m_"}], "}"}], "]"}], "=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "u", ",", "E1", ",", "E2", ",", "E1p", ",", "E1m", ",", "E2p", ",", 
+        "E2m"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"u", "=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+          RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"E1", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"UnitE", "[", "1", "]"}], "E1p"}], "+", 
+         RowBox[{
+          RowBox[{"UnitE", "[", 
+           RowBox[{"-", "1"}], "]"}], "E1m"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"E2", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"UnitE", "[", "1", "]"}], "E2p"}], "+", 
+         RowBox[{
+          RowBox[{"UnitE", "[", 
+           RowBox[{"-", "1"}], "]"}], "E2m"}]}]}], ";", "\[IndentingNewLine]",
+        "\[IndentingNewLine]", 
+       RowBox[{"Table", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Expand", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Coefficient", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"TrigToExp", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 FractionBox["1", "2"], 
+                 RowBox[{"(", 
+                  RowBox[{
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"u", ".", 
+                    RowBox[{"E1", "\[Conjugate]"}]}], ")"}], "2"], "+", 
+                   RowBox[{"u", ".", 
+                    RowBox[{"E2", "\[Conjugate]"}]}]}], ")"}], 
+                 RowBox[{"(", 
+                  RowBox[{
+                   SuperscriptBox[
+                    RowBox[{"(", 
+                    RowBox[{"u", ".", "E1"}], ")"}], "2"], "+", 
+                   RowBox[{"u", ".", "E2"}]}], ")"}]}], "\[IndentingNewLine]",
+                 "]"}], "/.", 
+               RowBox[{"{", 
+                RowBox[{"\[Theta]", "\[Rule]", 
+                 RowBox[{
+                  FractionBox["1", "\[ImaginaryI]"], 
+                  RowBox[{"Log", "[", "e\[ImaginaryI]\[Theta]", "]"}]}]}], 
+                "}"}]}], "\[IndentingNewLine]", ",", "e\[ImaginaryI]\[Theta]",
+               ",", "n"}], "]"}], "/.", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"E1p", "\[Rule]", 
+               RowBox[{"ReE1p", "+", 
+                RowBox[{"\[ImaginaryI]", " ", "ImE1p"}]}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"E1m", "\[Rule]", 
+               RowBox[{"ReE1m", "+", 
+                RowBox[{"\[ImaginaryI]", " ", "ImE1m"}]}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"E2p", "\[Rule]", 
+               RowBox[{"ReE2p", "+", 
+                RowBox[{"\[ImaginaryI]", " ", "ImE2p"}]}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"E2m", "\[Rule]", 
+               RowBox[{"ReE2m", "+", 
+                RowBox[{"\[ImaginaryI]", " ", "ImE2m"}]}]}]}], 
+             "\[IndentingNewLine]", "}"}]}], "/.", 
+           RowBox[{"{", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"Conjugate", "[", 
+              RowBox[{"symbol_", "?", "AtomQ"}], "]"}], "\[Rule]", "symbol"}],
+             "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "]"}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"{", 
+          RowBox[{"n", ",", "0", ",", "4"}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"NLPTOutcomes", "[", 
+    RowBox[{"{", 
+     RowBox[{"E1p_", ",", "E1m_", ",", "E2p_", ",", "E2m_"}], "}"}], "]"}], ":=", 
+   RowBox[{"NLPTOutcomes", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Re", "[", "E1p", "]"}], ",", 
+      RowBox[{"Im", "[", "E1p", "]"}], ",", 
+      RowBox[{"Re", "[", "E1m", "]"}], ",", 
+      RowBox[{"Im", "[", "E1m", "]"}], ",", 
+      RowBox[{"Re", "[", "E2p", "]"}], ",", 
+      RowBox[{"Im", "[", "E2p", "]"}], ",", 
+      RowBox[{"Re", "[", "E2m", "]"}], ",", 
+      RowBox[{"Im", "[", "E2m", "]"}]}], "}"}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"ae65895b-7533-477b-900c-c3f4768ed456"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["ReconstructionMimimizationTarget", \
+"Subsection",ExpressionUUID->"7a6558e6-5120-4203-90e3-9e0489cdd325"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"ReconstructionMimimizationTarget", "::", "usage"}], "=", 
+    "\"\<ReconstructionMimimizationTarget[{I0,I1,I2,I3,I4}][ReE1p,ImE1p,ReE1m,\
+ImE1m,ReE2p,ImE2p,ReE2m,ImE2m] calculates the reconstruction target \
+\!\(\*FormBox[RowBox[{UnderoverscriptBox[\"\[Sum]\", RowBox[{\"n\", \"=\", \
+\"0\"}], \"4\",LimitsPositioning->True], RowBox[{\"|\", RowBox[{SubscriptBox[\
+\"I\", \"n\"], \"-\", RowBox[{SubscriptBox[\"I\", \"n\"], \"(\", \"E\", \
+\")\"}]}], SuperscriptBox[\"|\", \"2\"]}]}],TraditionalForm]\), i.e. the sum \
+of squares of the nonlinear-polarimetry Fourier coefficients in difference \
+between the given \!\(\*SubscriptBox[\(I\), \(n\)]\) and those reconstructed \
+from the given complex fields.\>\""}], ";"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"ReconstructionMimimizationTarget", "[", 
+      RowBox[{"{", 
+       RowBox[{"I0_", ",", "I1_", ",", "I2_", ",", "I3_", ",", "I4_"}], "}"}],
+       "]"}], "[", 
+     RowBox[{
+     "ReE1p_", ",", "ImE1p_", ",", "ReE1m_", ",", "ImE1m_", ",", "ReE2p_", 
+      ",", "ImE2p_", ",", "ReE2m_", ",", "ImE2m_"}], "]"}], "=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "u", ",", "E1", ",", "E2", ",", "E1p", ",", "E1m", ",", "E2p", ",", 
+        "E2m"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"u", "=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Cos", "[", "\[Theta]", "]"}], ",", 
+          RowBox[{"Sin", "[", "\[Theta]", "]"}]}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"E1", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"UnitE", "[", "1", "]"}], "E1p"}], "+", 
+         RowBox[{
+          RowBox[{"UnitE", "[", 
+           RowBox[{"-", "1"}], "]"}], "E1m"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"E2", "=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"UnitE", "[", "1", "]"}], "E2p"}], "+", 
+         RowBox[{
+          RowBox[{"UnitE", "[", 
+           RowBox[{"-", "1"}], "]"}], "E2m"}]}]}], ";", "\[IndentingNewLine]",
+        "\[IndentingNewLine]", 
+       RowBox[{"Total", "[", 
+        RowBox[{"Flatten", "[", "\[IndentingNewLine]", 
+         RowBox[{"Table", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", "\[IndentingNewLine]", 
+             RowBox[{"Simplify", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{"ReIm", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"NLPTOutcomes", "[", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    "ReE1p", ",", "ImE1p", ",", "ReE1m", ",", "ImE1m", ",", 
+                    "ReE2p", ",", "ImE2p", ",", "ReE2m", ",", "ImE2m"}], 
+                    "}"}], "]"}], "\[LeftDoubleBracket]", 
+                  RowBox[{"n", "+", "1"}], "\[RightDoubleBracket]"}], "-", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{"I0", ",", "I1", ",", "I2", ",", "I3", ",", "I4"}],
+                    "}"}], "\[LeftDoubleBracket]", 
+                  RowBox[{"n", "+", "1"}], "\[RightDoubleBracket]"}]}], 
+                "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ",", 
+               RowBox[{"Assumptions", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{
+                    "ReE1p", ",", "ImE1p", ",", "ReE1m", ",", "ImE1m", ",", 
+                    "ReE2p", ",", "ImE2p", ",", "ReE2m", ",", "ImE2m"}], 
+                    "}"}], "\[Element]", "Reals"}], ",", 
+                  RowBox[{"I0", "\[Element]", "Reals"}]}], "}"}]}]}], 
+              "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", ")"}], 
+            "2"], "\[IndentingNewLine]", ",", 
+           RowBox[{"{", 
+            RowBox[{"n", ",", "0", ",", "4"}], "}"}]}], "\[IndentingNewLine]",
+           "]"}], "]"}], "\[IndentingNewLine]", "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"ed61a97b-3c48-44e4-9571-8bf1a9e8f529"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["ReconstructBicircularField", \
+"Subsection",ExpressionUUID->"5e48f34a-cf6d-4b9e-90f2-94fbf2892c2d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "ReconstructBicircularFieldList", "]"}], "=", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"SortingFunction", "\[Rule]", 
+        RowBox[{"Function", "[", 
+         RowBox[{"#", "[", "\"\<Residual\>\"", "]"}], "]"}]}], ",", 
+       RowBox[{"SelectionFunction", "\[Rule]", 
+        RowBox[{"Function", "[", "True", "]"}]}], ",", 
+       RowBox[{"Parallelize", "\[Rule]", "False"}]}], "}"}], ",", 
+     RowBox[{"Options", "[", "FindMinimum", "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Options", "[", "ReconstructBicircularField", "]"}], "=", 
+    RowBox[{"Options", "[", "ReconstructBicircularFieldList", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SortingFunction", "::", "usage"}], "=", 
+   "\"\<SortingFunction is an option for ReconstructBicircularField and \
+ReconstructBicircularFieldList that specifies a function (applied to the \
+results of the form \
+\[LeftAssociation]\\\"Fields\\\"\[Rule]fields,\\\"Outcomes\\\"\[Rule]outcomes,\
+\\\"\!\(\*SqrtBox[\(Residual\)]\)\\\"\[Rule]r,\\\"Residual\\\"\[Rule]\!\(\*\
+SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation]) used to sort the \
+individual minima.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SelectionFunction", "::", "usage"}], "=", 
+   "\"\<SelectionFunction is an option for ReconstructBicircularField and \
+ReconstructBicircularFieldList that specifies a function (applied to the \
+results of the form \
+\[LeftAssociation]\\\"Fields\\\"\[Rule]fields,\\\"Outcomes\\\"\[Rule]outcomes,\
+\\\"\!\(\*SqrtBox[\(Residual\)]\)\\\"\[Rule]r,\\\"Residual\\\"\[Rule]\!\(\*\
+SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation], and returning True or \
+False) used to keep or discard potential solutions.\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Protect", "[", 
+    RowBox[{"SortingFunction", ",", "SelectionFunction"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ReconstructBicircularField", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"I0_", ",", "I1_", ",", "I2_", ",", "I3_", ",", "I4_"}], "}"}], 
+     ",", 
+     RowBox[{"Erange_:", "1"}], ",", 
+     RowBox[{"iterations_:", "20"}], ",", 
+     RowBox[{"options", ":", 
+      RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+   RowBox[{"First", "[", "\[IndentingNewLine]", 
+    RowBox[{"ReconstructBicircularFieldList", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"I0", ",", "I1", ",", "I2", ",", "I3", ",", "I4"}], "}"}], ",",
+       "Erange", ",", "iterations", ",", "options"}], "]"}], 
+    "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ReconstructBicircularFieldList", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"I0_", ",", "I1_", ",", "I2_", ",", "I3_", ",", "I4_"}], "}"}], 
+     ",", 
+     RowBox[{"Erange_:", "1"}], ",", 
+     RowBox[{"iterations_:", "20"}], ",", 
+     RowBox[{"options", ":", 
+      RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"SortBy", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Select", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"OptionValue", "[", "Parallelize", "]"}], "\[Equal]", 
+             "True"}], ",", "Parallelize", ",", 
+            RowBox[{"#", "&"}]}], "]"}], "@", 
+          RowBox[{"Table", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Function", "[", 
+              RowBox[{"solution", ",", 
+               RowBox[{"Block", "[", 
+                RowBox[{
+                 RowBox[{"{", "fields", "}"}], ",", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"fields", "=", 
+                   RowBox[{"PhaseNormalization", "[", "\[IndentingNewLine]", 
+                    RowBox[{
+                    "EnsureRightCircularFundamental", "[", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ReE1p", "+", 
+                    RowBox[{"\[ImaginaryI]", " ", "ImE1p"}]}], ",", 
+                    RowBox[{"ReE1m", "+", 
+                    RowBox[{"\[ImaginaryI]", " ", "ImE1m"}]}], ",", 
+                    RowBox[{"ReE2p", "+", 
+                    RowBox[{"\[ImaginaryI]", " ", "ImE2p"}]}], ",", 
+                    RowBox[{"ReE2m", "+", 
+                    RowBox[{"\[ImaginaryI]", " ", "ImE2m"}]}]}], "}"}], "/.", 
+                    RowBox[{
+                    "solution", "\[LeftDoubleBracket]", "2", 
+                    "\[RightDoubleBracket]"}]}], "\[IndentingNewLine]", "]"}],
+                     "]"}]}], ";", "\[IndentingNewLine]", 
+                  RowBox[{"\[LeftAssociation]", 
+                   RowBox[{
+                    RowBox[{"\"\<Fields\>\"", "\[Rule]", "fields"}], ",", 
+                    RowBox[{"\"\<Outcomes\>\"", "\[Rule]", 
+                    RowBox[{"NLPTOutcomes", "[", "fields", "]"}]}], ",", 
+                    RowBox[{
+                    "\"\<\!\(\*SqrtBox[\(Residual\)]\)\>\"", "\[Rule]", 
+                    SqrtBox[
+                    RowBox[{
+                    "solution", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}]]}], ",", 
+                    RowBox[{"\"\<Residual\>\"", "\[Rule]", 
+                    RowBox[{
+                    "solution", "\[LeftDoubleBracket]", "1", 
+                    "\[RightDoubleBracket]"}]}]}], 
+                   "\[RightAssociation]"}]}]}], "\[IndentingNewLine]", 
+                "]"}]}], "\[IndentingNewLine]", "]"}], "[", 
+             "\[IndentingNewLine]", 
+             RowBox[{"FindMinimum", "[", "\[IndentingNewLine]", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"ReconstructionMimimizationTarget", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"I0", ",", "I1", ",", "I2", ",", "I3", ",", "I4"}], 
+                  "}"}], "]"}], "[", 
+                RowBox[{
+                "ReE1p", ",", "ImE1p", ",", "ReE1m", ",", "ImE1m", ",", 
+                 "ReE2p", ",", "ImE2p", ",", "ReE2m", ",", "ImE2m"}], "]"}], 
+               ",", "\[IndentingNewLine]", 
+               RowBox[{"Transpose", "[", 
+                RowBox[{"{", "\[IndentingNewLine]", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                   "ReE1p", ",", "ImE1p", ",", "ReE1m", ",", "ImE1m", ",", 
+                    "ReE2p", ",", "ImE2p", ",", "ReE2m", ",", "ImE2m"}], 
+                   "}"}], ",", "\[IndentingNewLine]", 
+                  RowBox[{"Erange", " ", 
+                   RowBox[{"RandomReal", "[", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", "8"}], 
+                    "]"}]}]}], "\[IndentingNewLine]", "}"}], "]"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Method", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<Newton\>\"", ",", 
+                  RowBox[{"StepControl", "\[Rule]", "\"\<TrustRegion\>\""}]}],
+                  "}"}]}], ",", "\[IndentingNewLine]", 
+               RowBox[{"Evaluate", "[", 
+                RowBox[{"Sequence", "@@", 
+                 RowBox[{"FilterRules", "[", 
+                  RowBox[{
+                   RowBox[{"{", "options", "}"}], ",", 
+                   RowBox[{"Options", "[", "FindMinimum", "]"}]}], "]"}]}], 
+                "]"}]}], "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+             "]"}], "\[IndentingNewLine]", ",", 
+            RowBox[{"{", "iterations", "}"}]}], "]"}]}], 
+         "\[IndentingNewLine]", ",", 
+         RowBox[{"OptionValue", "[", "SelectionFunction", "]"}]}], "]"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"OptionValue", "[", "SortingFunction", "]"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"4e02e7ea-e825-44d9-8e72-fea1305b1277"]
+}, Closed]],
 
 Cell[CellGroupData[{
 
 Cell["Package closure", \
-"Section",ExpressionUUID->"c4ab4a77-e2dd-4fc0-a41b-1a66eeb20238"],
+"Subsection",ExpressionUUID->"c4ab4a77-e2dd-4fc0-a41b-1a66eeb20238"],
 
 Cell[CellGroupData[{
 
@@ -400,7 +976,7 @@ Cell[BoxData[
  InitializationCell->
   True,ExpressionUUID->"80571e19-793e-4d30-a315-1c3eda65d555"]
 }, Open  ]]
-}, Open  ]]
+}, Closed]]
 }, Open  ]]
 }, Open  ]]
 },
