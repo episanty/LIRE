@@ -1,0 +1,470 @@
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[StyleBox["LIRE: Lissajous-figure Reconstruction for nonlinear \
+polarization tomography of bichromatic fields",
+ FontSize->
+  24]], "Title",ExpressionUUID->"7f209d14-bba5-4705-b124-d36a87c1beee"],
+
+Cell["\[Copyright] Emilio Pisanty 2019. Licensed under GPL and CC-BY-SA.", \
+"Text",ExpressionUUID->"d33e8ba8-08ed-4b04-9664-dabb00321cca"],
+
+Cell[CellGroupData[{
+
+Cell["Introduction", "Subchapter",
+ CellTags->
+  "Introduction",ExpressionUUID->"7ff79276-309e-493c-89fa-91d9bc963997"],
+
+Cell[CellGroupData[{
+
+Cell["Readme", \
+"Subsection",ExpressionUUID->"d2f11658-47f6-4acb-beb4-751bcdb6d763"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "LIRE is a Mathematica package for reconstructing the polarization Lissajous \
+figures of bichromatic ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[Omega]", ":", 
+    RowBox[{"2", "\[Omega]"}]}], TraditionalForm]],ExpressionUUID->
+  "7fbd7735-d8a0-4428-a08f-336f3ff24c15"],
+ " light-beam combinations, as described in the paper\n\n \[Bullet] Knotting \
+fractional-order knots with the polarization state of light. E. Pisanty et \
+al. ",
+ StyleBox["Nature Photonics",
+  FontSlant->"Italic"],
+ ", in press (2019), ",
+ ButtonBox["arXiv:1808.05193",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://arxiv.org/abs/1808.05193"], None},
+  ButtonNote->"https://arxiv.org/abs/1808.05193"],
+ ".\n\n"
+}], "Text",
+ CellGroupingRules->{
+  GroupTogetherGrouping, 
+   10000.},ExpressionUUID->"9a8d960d-6d88-4fad-945a-a1f7691d577b"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"LIRE", ":", " ", 
+    RowBox[{"Lissajous", "-", 
+     RowBox[{
+     "figure", " ", "Reconstruction", " ", "for", " ", "nonlinear", " ", 
+      "polarization", " ", "tomography", " ", "of", " ", "bichromatic", " ", 
+      RowBox[{"fields", "."}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"\[Copyright]", " ", "Emilio", " ", "Pisanty"}], ",", " ", 
+    "2019"}], " ", "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"For", " ", "more", " ", "information"}], ",", 
+    RowBox[{
+     RowBox[{"see", " ", 
+      RowBox[{"https", ":"}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"github", ".", "com"}], "/", "episanty"}], "/", "LIRE"}]}]}], 
+   " ", "*)"}]}]], "Input",
+ CellGroupingRules->{GroupTogetherGrouping, 10000.},
+ InitializationCell->
+  True,ExpressionUUID->"ac44aa9d-1eed-401b-86e5-fd78cdf4c3f0"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Licensing", \
+"Subsection",ExpressionUUID->"a68d7089-cb80-4cb6-9591-e6af9b4adf98"],
+
+Cell[TextData[{
+ "This code is dual-licensed under the GPL and CC-BY-SA licenses; you are \
+free to use, modify, and redistribute it, but you must abide by the terms in \
+either of those licenses.\n\nIn addition to that ",
+ StyleBox["legal",
+  FontSlant->"Italic"],
+ " obligation, if you use this code in calculations for an academic \
+publication, you have an ",
+ StyleBox["academic",
+  FontSlant->"Italic"],
+ " obligation to cite it correctly. For that purpose, please cite the ",
+ StyleBox["Nature Photonics",
+  FontSlant->"Italic"],
+ " paper above, or use a direct citation to the code such as\n\n    E. \
+Pisanty. LIRE: Lissajous-figure reconstruction for nonlinear polarization \
+tomography of bichromatic fields. https://github.com/episanty/LIRE (2019).\n  \
+  \nIf you wish to include a DOI in your citation, please use one of the \
+numbered-version releases."
+}], "Text",ExpressionUUID->"e4dc8b2a-3f71-489d-9066-76331a14d173"]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Implementation", \
+"Subchapter",ExpressionUUID->"a9df0d23-9b67-49e1-b9e3-1a72859431af"],
+
+Cell[CellGroupData[{
+
+Cell["Supporting functions", \
+"Section",ExpressionUUID->"13cfeb3a-3081-43d8-990e-d19965c81e1f"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", \
+"Subsection",ExpressionUUID->"577dcd29-2522-4f35-8241-66fdaeaf85c3"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"BeginPackage", "[", "\"\<LIRE`\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"a3fe781e-8db1-4219-aeaa-3f8c593d8fa5"],
+
+Cell[CellGroupData[{
+
+Cell["Version number", "Subsubsection",
+ CellTags->
+  "version-section",ExpressionUUID->"7967eb43-4226-4d1a-9004-c579590a2692"],
+
+Cell["\<\
+The variable $LIREversion gives the version of the LIRE package currently \
+loaded, and its timestamp\
+\>", "Text",ExpressionUUID->"a28c2cef-44a8-4f88-a13e-dcfb21613da5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"$LIREversion", "::", "usage"}], "=", 
+   "\"\<$LIREversion prints the current version of the LIRE package in use \
+and its timestamp.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$LIREtimestamp", "::", "usage"}], "=", 
+   "\"\<$LIREtimestamp prints the timestamp of the current version of the \
+LIRE package.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$LIREversion", ":=", 
+   RowBox[{"\"\<LIRE v1.0.0, \>\"", "<>", "$LIREtimestamp"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"06ed43a3-15ef-433b-bd29-4de20889334f"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}]], \
+"Input",ExpressionUUID->"f783f477-ece6-4850-8576-bae08557b269"],
+
+Cell["\<\
+The timestamp is updated every time the notebook is saved via an appropriate \
+notebook option, which is set by the code below.\
+\>", "Text",ExpressionUUID->"4cfda74d-345c-40a5-b2fd-c76ee540fdb0"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetOptions", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"EvaluationNotebook", "[", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"NotebookEventActions", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"\"\<MenuCommand\>\"", ",", "\"\<Save\>\""}], "}"}], 
+        "\[RuleDelayed]", 
+        RowBox[{"(", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"NotebookWrite", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Cells", "[", 
+              RowBox[{"CellTags", "\[Rule]", "\"\<version-timestamp\>\""}], 
+              "]"}], "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+            ",", "\[IndentingNewLine]", 
+            RowBox[{"Cell", "[", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"BoxData", "[", 
+               RowBox[{"RowBox", "[", 
+                RowBox[{"{", 
+                 RowBox[{
+                 "\"\<Begin[\\\"`Private`\\\"];\\n$LIREtimestamp=\\\"\>\"", "<>", 
+                  RowBox[{"DateString", "[", "]"}], "<>", 
+                  "\"\<\\\";\\nEnd[];\>\""}], "}"}], "]"}], "]"}], 
+              "\[IndentingNewLine]", ",", "\"\<Input\>\"", ",", 
+              RowBox[{"InitializationCell", "\[Rule]", "True"}], ",", 
+              RowBox[{"CellTags", "\[Rule]", "\"\<version-timestamp\>\""}]}], 
+             "\[IndentingNewLine]", "]"}], ",", "None", ",", 
+            RowBox[{"AutoScroll", "\[Rule]", "False"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"NotebookSave", "[", "]"}]}], "\[IndentingNewLine]", 
+         ")"}]}], ",", 
+       RowBox[{"PassEventsDown", "\[Rule]", "True"}]}], "}"}]}]}], 
+   "\[IndentingNewLine]", "]"}], 
+  ";"}]], "Input",ExpressionUUID->"9ab8bc8d-e5f1-4dac-984a-ed686444e4a4"],
+
+Cell["To reset this behaviour to normal, evaluate the cell below", \
+"Text",ExpressionUUID->"79a09c0b-5ada-4820-b171-adf7087428dd"],
+
+Cell[BoxData[
+ RowBox[{"SetOptions", "[", 
+  RowBox[{
+   RowBox[{"EvaluationNotebook", "[", "]"}], ",", 
+   RowBox[{"NotebookEventActions", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"\"\<MenuCommand\>\"", ",", "\"\<Save\>\""}], "}"}], 
+       "\[RuleDelayed]", 
+       RowBox[{"(", 
+        RowBox[{"NotebookSave", "[", "]"}], ")"}]}], ",", 
+      RowBox[{"PassEventsDown", "\[Rule]", "True"}]}], "}"}]}]}], 
+  "]"}]], "Input",ExpressionUUID->"8b66dfc7-af3c-410b-8fa6-50468f5c81a1"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Timestamp", \
+"Subsubsection",ExpressionUUID->"e4ba443b-8328-40ca-a2ea-2f059da3b0d7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 00:19:21\>\""}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->True,
+ CellTags->
+  "version-timestamp",ExpressionUUID->"6421c477-2d4b-4c25-a7ad-c255b20e6037"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Directory", \
+"Subsubsection",ExpressionUUID->"a08baa08-be3a-4c5a-841c-4752dd040189"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"$LIREdirectory", "::", "usage"}], "=", 
+   "\"\<$LIREdirectory is the directory where the current LIRE package \
+instance is located.\>\""}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"7118bda8-aff5-475a-947f-062f4095057b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"softLinkTestString", "=", 
+      RowBox[{"StringSplit", "[", 
+       RowBox[{
+        RowBox[{"StringJoin", "[", 
+         RowBox[{"ReadList", "[", 
+          RowBox[{
+           RowBox[{"\"\<! ls -la \>\"", "<>", 
+            RowBox[{"StringReplace", "[", 
+             RowBox[{"$InputFileName", ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\< \>\"", "\[Rule]", "\"\<\\\\ \>\""}], "}"}]}], 
+             "]"}]}], ",", "String"}], "]"}], "]"}], ",", "\"\< -> \>\""}], 
+       "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Length", "[", "softLinkTestString", "]"}], ">", "1"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Testing", " ", "in", " ", "case", " ", "$InputFileName", " ", "is", 
+        " ", "a", " ", "soft", " ", "link", " ", "to", " ", "the", " ", 
+        "actual", " ", 
+        RowBox[{"directory", "."}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"$LIREdirectory", "=", 
+       RowBox[{"StringReplace", "[", 
+        RowBox[{
+         RowBox[{"DirectoryName", "[", 
+          RowBox[{
+          "softLinkTestString", "\[LeftDoubleBracket]", "2", 
+           "\[RightDoubleBracket]"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"\"\< \>\"", "\[Rule]", "\"\<\\\\ \>\""}], "}"}]}], "]"}]}],
+       ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"$LIREdirectory", "=", 
+        RowBox[{"StringReplace", "[", 
+         RowBox[{
+          RowBox[{"DirectoryName", "[", "$InputFileName", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"\"\< \>\"", "\[Rule]", "\"\<\\\\ \>\""}], "}"}]}], 
+         "]"}]}], ";"}]}], "\[IndentingNewLine]", "]"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"2b7faeb3-0b7f-4278-a4ce-f42af4a5710c"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Git commit hash and message", \
+"Subsubsection",ExpressionUUID->"1ff533b2-9a38-4429-9b2e-e43ce4aa6011"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"$LIREcommit", "::", "usage"}], "=", 
+   "\"\<$LIREcommit returns the git commit log at the location of the LIRE \
+package if there is one.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"$LIREcommit", "::", "OS"}], "=", 
+   "\"\<$LIREcommit has only been tested on Linux.\>\""}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"f3d4f095-f46c-475e-8c2f-250286e5d436"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$LIREcommit", ":=", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"$OperatingSystem", "\[NotEqual]", "\"\<Unix\>\""}], ",", 
+       RowBox[{"Message", "[", 
+        RowBox[{"$LIREcommit", "::", "OS"}], "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"Riffle", "[", 
+       RowBox[{
+        RowBox[{"ReadList", "[", 
+         RowBox[{
+          RowBox[{
+          "\"\<!cd \>\"", "<>", "$LIREdirectory", "<>", 
+           "\"\< && git log -1\>\""}], ",", "String"}], "]"}], ",", 
+        RowBox[{"{", "\"\<\\n\>\"", "}"}]}], "]"}], "]"}]}], ")"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"a8480c42-c519-423d-a120-4aa44435c59d"]
+}, Closed]]
+}, Open  ]],
+
+Cell["Code", \
+"Subsection",ExpressionUUID->"f811dfa5-3e13-4c6b-9bea-88e7709dd1f7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Package closure", \
+"Section",ExpressionUUID->"c4ab4a77-e2dd-4fc0-a41b-1a66eeb20238"],
+
+Cell[CellGroupData[{
+
+Cell["End of package", \
+"Subsubsection",ExpressionUUID->"5c22c003-8445-4e4a-b7c4-4bb055378951"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"EndPackage", "[", "]"}], ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"41e28dd9-26c5-47b9-8875-713ef3971763"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Add to distributed contexts.", \
+"Subsubsection",ExpressionUUID->"bd47262e-0fd3-4089-bc7d-399fe29bf374"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DistributeDefinitions", "[", "\"\<LIRE`\>\"", "]"}], 
+  ";"}]], "Input",
+ InitializationCell->
+  True,ExpressionUUID->"80571e19-793e-4d30-a315-1c3eda65d555"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->Automatic,
+NotebookEventActions->{{"MenuCommand", "Save"} :> (NotebookWrite[
+     Part[
+      Cells[CellTags -> "version-timestamp"], 1], 
+     Cell[
+      BoxData[
+       RowBox[{
+         StringJoin["Begin[\"`Private`\"];\n$LIREtimestamp=\"", 
+          DateString[], "\";\nEnd[];"]}]], "Input", InitializationCell -> 
+      True, CellTags -> "version-timestamp"], None, AutoScroll -> False]; 
+   NotebookSave[]), PassEventsDown -> True},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+PrintingCopies->1,
+PrintingStartingPageNumber->1,
+PrintingPageRange->{Automatic, Automatic},
+PageHeaders->{{None, None, 
+   Cell[
+    TextData[{
+     "RB", "-", "SFA", ":", " ", "Rotating", " ", "Bicircular", " ", "HHG", 
+      " ", "in", " ", "the", " ", "Strong", " ", "Field", " ", 
+      "Approximation", "|", "   ", 
+      StyleBox[
+       CounterBox["Page"], "PageNumber"]}], "Header", 
+    CellMargins -> {{Inherited, 0}, {Inherited, Inherited}}]}, {None, None, 
+   Cell[
+    TextData[{
+     "RB", "-", "SFA", ":", " ", "Rotating", " ", "Bicircular", " ", "HHG", 
+      " ", "in", " ", "the", " ", "Strong", " ", "Field", " ", 
+      "Approximation", "|", "   ", 
+      StyleBox[
+       CounterBox["Page"], "PageNumber"]}], "Header", 
+    CellMargins -> {{Inherited, 0}, {Inherited, Inherited}}]}},
+PageFooters->{{None, None, None}, {None, None, None}},
+PageHeaderLines->{False, False},
+PageFooterLines->{False, False},
+PrintingOptions->{"FacingPages"->True,
+"FirstPageFace"->Right,
+"FirstPageFooter"->True,
+"FirstPageHeader"->False,
+"PaperOrientation"->"Portrait",
+"PaperSize"->{594.75, 842.25},
+"PostScriptOutputFile"->"~/Desktop/print.pdf",
+"PrintingMargins"->{{19.84251968503, 19.84251968503}, {72., 72.}}},
+PrivateNotebookOptions->{"FileOutlineCache"->False},
+ShowSelection->True,
+TrackCellChangeTimes->False,
+SpellingDictionaries->{"CorrectWords"->{
+ "subpackage", "Pisanty", "subpackages"}},
+Background->None,
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Code"], FontWeight -> "Plain", FontSlant -> "Plain", 
+    FontTracking -> "Plain", 
+    FontVariations -> {
+     "Outline" -> False, "Shadow" -> False, "StrikeThrough" -> False, 
+      "Underline" -> False}]}, Visible -> False, FrontEndVersion -> 
+  "11.2 for Microsoft Windows (64-bit) (September 10, 2017)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+
