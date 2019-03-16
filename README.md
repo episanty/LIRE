@@ -1,7 +1,5 @@
-﻿LIRE
+﻿LIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields
 ====
-
-Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields
 
 © Emilio Pisanty, 2019
 
