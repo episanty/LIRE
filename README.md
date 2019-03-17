@@ -16,6 +16,6 @@ This code is dual-licensed under the GPL and CC-BY-SA licenses; you are free to 
 
 In addition to that legal obligation, if you use this code in calculations for an academic publication, you have an academic obligation to cite it correctly. For that purpose, please cite the Nature Photonics paper above, or use a direct citation to the code such as
 
-    E. Pisanty. LIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields. https://github.com/episanty/LIRE (2019).
+ - E. Pisanty. LIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields. https://github.com/episanty/LIRE (2019).
     
 If you wish to include a DOI in your citation, please use one of the numbered-version releases.
