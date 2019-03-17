@@ -239,11 +239,11 @@ Cell["Timestamp", \
 Cell[BoxData[
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";", 
-  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 01:18:13\>\""}], ";", 
+  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 04:52:59\>\""}], ";", 
   RowBox[{"End", "[", "]"}], ";"}]], "Input",
  InitializationCell->True,
  CellTags->
-  "version-timestamp",ExpressionUUID->"8dcdbf82-92e1-493a-a519-2d573efa85d5"]
+  "version-timestamp",ExpressionUUID->"62ae02ef-828a-477a-8dd6-a6fee007347b"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -756,7 +756,7 @@ from the given complex fields.\>\""}], ";"}], "\[IndentingNewLine]",
   RowBox[{"End", "[", "]"}], ";"}]}], "Input",
  InitializationCell->
   True,ExpressionUUID->"ed61a97b-3c48-44e4-9571-8bf1a9e8f529"]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
@@ -1373,7 +1373,7 @@ Cell[BoxData[
     "\[RightAssociation]"}]}], 
   "}"}]], "Output",ExpressionUUID->"bc341200-2683-4370-b34f-34e8f1313c56"]
 }, Open  ]]
-}, Open  ]],
+}, Closed]],
 
 Cell[CellGroupData[{
 
