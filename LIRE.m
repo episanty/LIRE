@@ -39,9 +39,7 @@ End[];
 
 
 (* ::Input::Initialization:: *)
-Begin["`Private`"];
-$LIREtimestamp="Sun 17 Mar 2019 00:41:52";
-End[];
+Begin["`Private`"];$LIREtimestamp="Sun 17 Mar 2019 01:18:13";End[];
 
 
 (* ::Input::Initialization:: *)
@@ -71,8 +69,11 @@ End[];
 
 
 (* ::Input::Initialization:: *)
+UnitE::usage="UnitE[1] and UnitE[-1] return, respectively, \!\(\*FractionBox[\(1\), SqrtBox[\(2\)]]\){1,\[ImaginaryI]} and \!\(\*FractionBox[\(1\), SqrtBox[\(2\)]]\){1,-\[ImaginaryI]}.";
+Begin["`Private`"];
 UnitE[1]=1/Sqrt[2] {1,I};
 UnitE[-1]=1/Sqrt[2] {1,-I};
+End[];
 
 
 (* ::Input::Initialization:: *)
@@ -171,9 +172,24 @@ End[];
 Options[ReconstructBicircularFieldList]=Join[{SortingFunction->Function[#["Residual"]],SelectionFunction->Function[True],Parallelize->False},Options[FindMinimum]];
 Options[ReconstructBicircularField]=Options[ReconstructBicircularFieldList];
 
-SortingFunction::usage="SortingFunction is an option for ReconstructBicircularField and ReconstructBicircularFieldList that specifies a function (applied to the results of the form \[LeftAssociation]\"Fields\"\[Rule]fields,\"Outcomes\"\[Rule]outcomes,\"\!\(\*SqrtBox[\(Residual\)]\)\"\[Rule]r,\"Residual\"\[Rule]\!\(\*SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation]) used to sort the individual minima.";
-SelectionFunction::usage="SelectionFunction is an option for ReconstructBicircularField and ReconstructBicircularFieldList that specifies a function (applied to the results of the form \[LeftAssociation]\"Fields\"\[Rule]fields,\"Outcomes\"\[Rule]outcomes,\"\!\(\*SqrtBox[\(Residual\)]\)\"\[Rule]r,\"Residual\"\[Rule]\!\(\*SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation], and returning True or False) used to keep or discard potential solutions.";
+SortingFunction::usage="SortingFunction is an option for ReconstructBicircularField and ReconstructBicircularFieldList that specifies a function (applied to the results of the form \[LeftAssociation]\"Fields\"\[Rule]{\!\(\*SubscriptBox[\(E\), \(\(1\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(1\)\(-\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(-\)\)]\)},\"Outcomes\"\[Rule]{\!\(\*SubscriptBox[\(I\), \(0, rec\)]\),\!\(\*SubscriptBox[\(I\), \(1, rec\)]\),\!\(\*SubscriptBox[\(I\), \(2, rec\)]\),\!\(\*SubscriptBox[\(I\), \(3, rec\)]\),\!\(\*SubscriptBox[\(I\), \(4, rec\)]\)},\"\!\(\*SqrtBox[\(Residual\)]\)\"\[Rule]r,\"Residual\"\[Rule]\!\(\*SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation]) used to sort the individual minima.";
+SelectionFunction::usage="SelectionFunction is an option for ReconstructBicircularField and ReconstructBicircularFieldList that specifies a function (applied to the results of the form \[LeftAssociation]\"Fields\"\[Rule]{\!\(\*SubscriptBox[\(E\), \(\(1\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(1\)\(-\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(-\)\)]\)},\"Outcomes\"\[Rule]{\!\(\*SubscriptBox[\(I\), \(0, rec\)]\),\!\(\*SubscriptBox[\(I\), \(1, rec\)]\),\!\(\*SubscriptBox[\(I\), \(2, rec\)]\),\!\(\*SubscriptBox[\(I\), \(3, rec\)]\),\!\(\*SubscriptBox[\(I\), \(4, rec\)]\)},\"\!\(\*SqrtBox[\(Residual\)]\)\"\[Rule]r,\"Residual\"\[Rule]\!\(\*SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation], and returning True or False) used to keep or discard potential solutions.";
 Protect[SortingFunction,SelectionFunction];
+
+
+ReconstructBicircularFieldList::usage="ReconstructBicircularFieldList[{I0,I1,I2,I3,I4}] calculates a list of candidate reconstructed fields (each an Association of the form \[LeftAssociation]\"Fields\"\[Rule]{\!\(\*SubscriptBox[\(E\), \(\(1\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(1\)\(-\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(+\)\)]\),\!\(\*SubscriptBox[\(E\), \(\(2\)\(-\)\)]\)},\"Outcomes\"\[Rule]{\!\(\*SubscriptBox[\(I\), \(0, rec\)]\),\!\(\*SubscriptBox[\(I\), \(1, rec\)]\),\!\(\*SubscriptBox[\(I\), \(2, rec\)]\),\!\(\*SubscriptBox[\(I\), \(3, rec\)]\),\!\(\*SubscriptBox[\(I\), \(4, rec\)]\)},\"\!\(\*SqrtBox[\(Residual\)]\)\"\[Rule]r,\"Residual\"\[Rule]\!\(\*SuperscriptBox[\(r\), \(2\)]\)\[RightAssociation]), obtained by minimizing ReconstructionMimimizationTarget over a list of random initial seeds pulled from a box of side 1.
+
+ReconstructBicircularFieldList[{I0,I1,I2,I3,I4},Erange] uses a box of side Erange (which can be a single number, or a list of eight real numbers to be used as the sizes of the boxes for {ReE1p,ImE1p,ReE1m,ImE1m,ReE2p,ImE2p,ReE2m,ImE2m}) for the initial seeds of the minimization.
+
+ReconstructBicircularFieldList[{I0,I1,I2,I3,I4},Erange,iterations] uses the specified number of iterations.";
+
+
+ReconstructBicircularField::usage="ReconstructBicircularField[{I0,I1,I2,I3,I4}] returns the first element of the corresponding ReconstructBicircularFieldList, using the specified (or default) SortingFunction.
+
+ReconstructBicircularField[{I0,I1,I2,I3,I4},Erange] returns the first element of the corresponding ReconstructBicircularFieldList, using the specified (or default) SortingFunction.
+
+ReconstructBicircularField[{I0,I1,I2,I3,I4},Erange,iterations] returns the first element of the corresponding ReconstructBicircularFieldList, using the specified (or default) SortingFunction.";
+
 
 Begin["`Private`"];
 
