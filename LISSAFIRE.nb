@@ -1,8 +1,8 @@
 Notebook[{
 
 Cell[CellGroupData[{
-Cell[TextData[StyleBox["LIRE: Lissajous-figure Reconstruction for nonlinear \
-polarization tomography of bichromatic fields",
+Cell[TextData[StyleBox["LISSAFIRE: Lissajous-figure Reconstruction for \
+nonlinear polarization tomography of bichromatic fields",
  FontSize->
   24]], "Title",ExpressionUUID->"7f209d14-bba5-4705-b124-d36a87c1beee"],
 
@@ -23,8 +23,8 @@ Cell["Readme", \
 Cell[CellGroupData[{
 
 Cell[TextData[{
- "LIRE is a Mathematica package for reconstructing the polarization Lissajous \
-figures of bichromatic ",
+ "LISSAFIRE is a Mathematica package for reconstructing the polarization \
+Lissajous figures of bichromatic ",
  Cell[BoxData[
   FormBox[
    RowBox[{"\[Omega]", ":", 
@@ -50,7 +50,7 @@ al. ",
 Cell[BoxData[
  RowBox[{
   RowBox[{"(*", " ", 
-   RowBox[{"LIRE", ":", " ", 
+   RowBox[{"LISSAFIRE", ":", " ", 
     RowBox[{"Lissajous", "-", 
      RowBox[{
      "figure", " ", "Reconstruction", " ", "for", " ", "nonlinear", " ", 
@@ -68,8 +68,8 @@ Cell[BoxData[
       RowBox[{"https", ":"}]}], "//", 
      RowBox[{
       RowBox[{
-       RowBox[{"github", ".", "com"}], "/", "episanty"}], "/", "LIRE"}]}]}], 
-   " ", "*)"}]}]], "Input",
+       RowBox[{"github", ".", "com"}], "/", "episanty"}], "/", 
+      "LISSAFIRE"}]}]}], " ", "*)"}]}]], "Input",
  CellGroupingRules->{GroupTogetherGrouping, 10000.},
  InitializationCell->
   True,ExpressionUUID->"ac44aa9d-1eed-401b-86e5-fd78cdf4c3f0"]
@@ -95,10 +95,10 @@ publication, you have an ",
  StyleBox["Nature Photonics",
   FontSlant->"Italic"],
  " paper above, or use a direct citation to the code such as\n\n    E. \
-Pisanty. LIRE: Lissajous-figure reconstruction for nonlinear polarization \
-tomography of bichromatic fields. https://github.com/episanty/LIRE (2019).\n  \
-  \nIf you wish to include a DOI in your citation, please use one of the \
-numbered-version releases."
+Pisanty. LISSAFIRE: Lissajous-figure reconstruction for nonlinear \
+polarization tomography of bichromatic fields. \
+https://github.com/episanty/LISSAFIRE (2019).\n    \nIf you wish to include a \
+DOI in your citation, please use one of the numbered-version releases."
 }], "Text",ExpressionUUID->"e4dc8b2a-3f71-489d-9066-76331a14d173"]
 }, Open  ]]
 }, Open  ]],
@@ -120,7 +120,7 @@ Cell["Package initialization", \
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"BeginPackage", "[", "\"\<LIRE`\>\"", "]"}], ";"}]], "Input",
+  RowBox[{"BeginPackage", "[", "\"\<LISSAFIRE`\>\"", "]"}], ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"a3fe781e-8db1-4219-aeaa-3f8c593d8fa5"]
 }, Closed]],
@@ -132,27 +132,27 @@ Cell["Version number", "Subsubsection",
   "version-section",ExpressionUUID->"7967eb43-4226-4d1a-9004-c579590a2692"],
 
 Cell["\<\
-The variable $LIREversion gives the version of the LIRE package currently \
+The variable $LISSAFIREversion gives the version of the LISSAFIRE package currently \
 loaded, and its timestamp\
 \>", "Text",ExpressionUUID->"a28c2cef-44a8-4f88-a13e-dcfb21613da5"],
 
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"$LIREversion", "::", "usage"}], "=", 
-   "\"\<$LIREversion prints the current version of the LIRE package in use \
-and its timestamp.\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"$LISSAFIREversion", "::", "usage"}], "=", 
+   "\"\<$LISSAFIREversion prints the current version of the LISSAFIRE package \
+in use and its timestamp.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"$LIREtimestamp", "::", "usage"}], "=", 
-   "\"\<$LIREtimestamp prints the timestamp of the current version of the \
-LIRE package.\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"$LISSAFIREtimestamp", "::", "usage"}], "=", 
+   "\"\<$LISSAFIREtimestamp prints the timestamp of the current version of \
+the LISSAFIRE package.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"$LIREversion", ":=", 
-   RowBox[{"\"\<LIRE v1.0.0, \>\"", "<>", "$LIREtimestamp"}]}], 
+  RowBox[{"$LISSAFIREversion", ":=", 
+   RowBox[{"\"\<LISSAFIRE v1.0.1, \>\"", "<>", "$LISSAFIREtimestamp"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"End", "[", "]"}], ";"}]}], "Input",
@@ -196,7 +196,8 @@ Cell[BoxData[
                RowBox[{"RowBox", "[", 
                 RowBox[{"{", 
                  RowBox[{
-                 "\"\<Begin[\\\"`Private`\\\"];$LIREtimestamp=\\\"\>\"", "<>", 
+                 "\"\<Begin[\\\"`Private`\\\"];$LISSAFIREtimestamp=\\\"\>\"", 
+                  "<>", 
                   RowBox[{"DateString", "[", "]"}], "<>", 
                   "\"\<\\\";End[];\>\""}], "}"}], "]"}], "]"}], 
               "\[IndentingNewLine]", ",", "\"\<Input\>\"", ",", 
@@ -208,8 +209,8 @@ Cell[BoxData[
           RowBox[{"NotebookSave", "[", "]"}]}], "\[IndentingNewLine]", 
          ")"}]}], ",", 
        RowBox[{"PassEventsDown", "\[Rule]", "True"}]}], "}"}]}]}], 
-   "\[IndentingNewLine]", "]"}], 
-  ";"}]], "Input",ExpressionUUID->"9ab8bc8d-e5f1-4dac-984a-ed686444e4a4"],
+   "\[IndentingNewLine]", "]"}], ";"}]], "Input",
+ CellLabel->"In[2]:=",ExpressionUUID->"9ab8bc8d-e5f1-4dac-984a-ed686444e4a4"],
 
 Cell["To reset this behaviour to normal, evaluate the cell below", \
 "Text",ExpressionUUID->"79a09c0b-5ada-4820-b171-adf7087428dd"],
@@ -239,11 +240,12 @@ Cell["Timestamp", \
 Cell[BoxData[
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";", 
-  RowBox[{"$LIREtimestamp", "=", "\"\<Sun 17 Mar 2019 05:00:50\>\""}], ";", 
+  RowBox[{"$LISSAFIREtimestamp", "=", "\"\<Tue 23 Apr 2019 20:32:28\>\""}], 
+  ";", 
   RowBox[{"End", "[", "]"}], ";"}]], "Input",
  InitializationCell->True,
  CellTags->
-  "version-timestamp",ExpressionUUID->"fa6a2079-9019-4956-86f9-eb95d49e4b49"]
+  "version-timestamp",ExpressionUUID->"a710743c-db4b-4743-880c-1e6f3e5b8f7e"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -254,9 +256,9 @@ Cell["Directory", \
 Cell[BoxData[
  RowBox[{
   RowBox[{
-   RowBox[{"$LIREdirectory", "::", "usage"}], "=", 
-   "\"\<$LIREdirectory is the directory where the current LIRE package \
-instance is located.\>\""}], ";"}]], "Input",
+   RowBox[{"$LISSAFIREdirectory", "::", "usage"}], "=", 
+   "\"\<$LISSAFIREdirectory is the directory where the current LISSAFIRE \
+package instance is located.\>\""}], ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"7118bda8-aff5-475a-947f-062f4095057b"],
 
@@ -291,7 +293,7 @@ Cell[BoxData[{
         " ", "a", " ", "soft", " ", "link", " ", "to", " ", "the", " ", 
         "actual", " ", 
         RowBox[{"directory", "."}]}], "*)"}], "\[IndentingNewLine]", 
-      RowBox[{"$LIREdirectory", "=", 
+      RowBox[{"$LISSAFIREdirectory", "=", 
        RowBox[{"StringReplace", "[", 
         RowBox[{
          RowBox[{"DirectoryName", "[", 
@@ -302,7 +304,7 @@ Cell[BoxData[{
           RowBox[{"\"\< \>\"", "\[Rule]", "\"\<\\\\ \>\""}], "}"}]}], "]"}]}],
        ",", "\[IndentingNewLine]", 
       RowBox[{
-       RowBox[{"$LIREdirectory", "=", 
+       RowBox[{"$LISSAFIREdirectory", "=", 
         RowBox[{"StringReplace", "[", 
          RowBox[{
           RowBox[{"DirectoryName", "[", "$InputFileName", "]"}], ",", 
@@ -324,13 +326,14 @@ Cell["Git commit hash and message", \
 Cell[BoxData[{
  RowBox[{
   RowBox[{
-   RowBox[{"$LIREcommit", "::", "usage"}], "=", 
-   "\"\<$LIREcommit returns the git commit log at the location of the LIRE \
-package if there is one.\>\""}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"$LISSAFIREcommit", "::", "usage"}], "=", 
+   "\"\<$LISSAFIREcommit returns the git commit log at the location of the \
+LISSAFIRE package if there is one.\>\""}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
-   RowBox[{"$LIREcommit", "::", "OS"}], "=", 
-   "\"\<$LIREcommit has only been tested on Linux.\>\""}], ";"}]}], "Input",
+   RowBox[{"$LISSAFIREcommit", "::", "OS"}], "=", 
+   "\"\<$LISSAFIREcommit has only been tested on Linux.\>\""}], 
+  ";"}]}], "Input",
  InitializationCell->
   True,ExpressionUUID->"f3d4f095-f46c-475e-8c2f-250286e5d436"],
 
@@ -339,14 +342,14 @@ Cell[BoxData[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
-  RowBox[{"$LIREcommit", ":=", 
+  RowBox[{"$LISSAFIREcommit", ":=", 
    RowBox[{"(", 
     RowBox[{
      RowBox[{"If", "[", 
       RowBox[{
        RowBox[{"$OperatingSystem", "\[NotEqual]", "\"\<Unix\>\""}], ",", 
        RowBox[{"Message", "[", 
-        RowBox[{"$LIREcommit", "::", "OS"}], "]"}]}], "]"}], ";", 
+        RowBox[{"$LISSAFIREcommit", "::", "OS"}], "]"}]}], "]"}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"StringJoin", "[", 
       RowBox[{"Riffle", "[", 
@@ -354,7 +357,7 @@ Cell[BoxData[{
         RowBox[{"ReadList", "[", 
          RowBox[{
           RowBox[{
-          "\"\<!cd \>\"", "<>", "$LIREdirectory", "<>", 
+          "\"\<!cd \>\"", "<>", "$LISSAFIREdirectory", "<>", 
            "\"\< && git log -1\>\""}], ",", "String"}], "]"}], ",", 
         RowBox[{"{", "\"\<\\n\>\"", "}"}]}], "]"}], "]"}]}], ")"}]}], 
   ";"}], "\[IndentingNewLine]", 
@@ -935,6 +938,7 @@ specified (or default) SortingFunction.\>\""}], ";"}], "\[IndentingNewLine]",
                     RowBox[{"\[ImaginaryI]", " ", "ImE2p"}]}], ",", 
                     RowBox[{"ReE2m", "+", 
                     RowBox[{"\[ImaginaryI]", " ", "ImE2m"}]}]}], "}"}], "/.", 
+                    
                     RowBox[{
                     "solution", "\[LeftDoubleBracket]", "2", 
                     "\[RightDoubleBracket]"}]}], "\[IndentingNewLine]", "]"}],
@@ -1034,7 +1038,7 @@ Cell["Add to distributed contexts.", \
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"DistributeDefinitions", "[", "\"\<LIRE`\>\"", "]"}], 
+  RowBox[{"DistributeDefinitions", "[", "\"\<LISSAFIRE`\>\"", "]"}], 
   ";"}]], "Input",
  InitializationCell->
   True,ExpressionUUID->"80571e19-793e-4d30-a315-1c3eda65d555"]
@@ -1050,12 +1054,12 @@ NotebookEventActions->{{"MenuCommand", "Save"} :> (NotebookWrite[
      Cell[
       BoxData[
        RowBox[{
-         StringJoin["Begin[\"`Private`\"];$LIREtimestamp=\"", 
+         StringJoin["Begin[\"`Private`\"];$LISSAFIREtimestamp=\"", 
           DateString[], "\";End[];"]}]], "Input", InitializationCell -> True, 
       CellTags -> "version-timestamp"], None, AutoScroll -> False]; 
    NotebookSave[]), PassEventsDown -> True},
 WindowSize->{1536, 781},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowMargins->{{0, Automatic}, {Automatic, 90}},
 PrintingCopies->1,
 PrintingStartingPageNumber->1,
 PrintingPageRange->{Automatic, Automatic},
@@ -1093,7 +1097,7 @@ TrackCellChangeTimes->False,
 SpellingDictionaries->{"CorrectWords"->{
  "subpackage", "Pisanty", "subpackages"}},
 Background->None,
-FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
 StyleDefinitions->Notebook[{
    Cell[
     StyleData[StyleDefinitions -> "Default.nb"]], 
@@ -1103,7 +1107,7 @@ StyleDefinitions->Notebook[{
     FontVariations -> {
      "Outline" -> False, "Shadow" -> False, "StrikeThrough" -> False, 
       "Underline" -> False}]}, Visible -> False, FrontEndVersion -> 
-  "11.2 for Microsoft Windows (64-bit) (September 10, 2017)", 
-  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+  "11.3 for Linux x86 (64-bit) (March 6, 2018)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"]
 ]
 

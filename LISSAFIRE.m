@@ -20,50 +20,50 @@
 
 
 (* ::Input::Initialization:: *)
-(* LIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields. *)
+(* LISSAFIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields. *)
 (* \[Copyright] Emilio Pisanty, 2019 *)
 
-(* For more information,see https://github.com/episanty/LIRE *)
+(* For more information,see https://github.com/episanty/LISSAFIRE *)
 
 
 (* ::Input::Initialization:: *)
-BeginPackage["LIRE`"];
+BeginPackage["LISSAFIRE`"];
 
 
 (* ::Input::Initialization:: *)
-$LIREversion::usage="$LIREversion prints the current version of the LIRE package in use and its timestamp.";
-$LIREtimestamp::usage="$LIREtimestamp prints the timestamp of the current version of the LIRE package.";
+$LISSAFIREversion::usage="$LISSAFIREversion prints the current version of the LISSAFIRE package in use and its timestamp.";
+$LISSAFIREtimestamp::usage="$LISSAFIREtimestamp prints the timestamp of the current version of the LISSAFIRE package.";
 Begin["`Private`"];
-$LIREversion:="LIRE v1.0.0, "<>$LIREtimestamp;
+$LISSAFIREversion:="LISSAFIRE v1.0.1, "<>$LISSAFIREtimestamp;
 End[];
 
 
 (* ::Input::Initialization:: *)
-Begin["`Private`"];$LIREtimestamp="Sun 17 Mar 2019 05:00:50";End[];
+Begin["`Private`"];$LISSAFIREtimestamp="Tue 23 Apr 2019 20:32:28";End[];
 
 
 (* ::Input::Initialization:: *)
-$LIREdirectory::usage="$LIREdirectory is the directory where the current LIRE package instance is located.";
+$LISSAFIREdirectory::usage="$LISSAFIREdirectory is the directory where the current LISSAFIRE package instance is located.";
 
 
 (* ::Input::Initialization:: *)
 Begin["`Private`"];
 With[{softLinkTestString=StringSplit[StringJoin[ReadList["! ls -la "<>StringReplace[$InputFileName,{" "->"\\ "}],String]]," -> "]},
 If[Length[softLinkTestString]>1,(*Testing in case $InputFileName is a soft link to the actual directory.*)
-$LIREdirectory=StringReplace[DirectoryName[softLinkTestString[[2]]],{" "->"\\ "}],
-$LIREdirectory=StringReplace[DirectoryName[$InputFileName],{" "->"\\ "}];
+$LISSAFIREdirectory=StringReplace[DirectoryName[softLinkTestString[[2]]],{" "->"\\ "}],
+$LISSAFIREdirectory=StringReplace[DirectoryName[$InputFileName],{" "->"\\ "}];
 ]];
 End[];
 
 
 (* ::Input::Initialization:: *)
-$LIREcommit::usage="$LIREcommit returns the git commit log at the location of the LIRE package if there is one.";
-$LIREcommit::OS="$LIREcommit has only been tested on Linux.";
+$LISSAFIREcommit::usage="$LISSAFIREcommit returns the git commit log at the location of the LISSAFIRE package if there is one.";
+$LISSAFIREcommit::OS="$LISSAFIREcommit has only been tested on Linux.";
 
 
 (* ::Input::Initialization:: *)
 Begin["`Private`"];
-$LIREcommit:=(If[$OperatingSystem!="Unix",Message[$LIREcommit::OS]];
+$LISSAFIREcommit:=(If[$OperatingSystem!="Unix",Message[$LIREcommit::OS]];
 StringJoin[Riffle[ReadList["!cd "<>$LIREdirectory<>" && git log -1",String],{"\n"}]]);
 End[];
 

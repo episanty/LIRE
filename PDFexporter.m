@@ -15,8 +15,8 @@ directory=Quiet[Check[NotebookDirectory[],DirectoryName[$InputFileName]],{FrontE
 
 
 Export[
-FileNameJoin[{directory,"LIRE.pdf"}],
-Import[FileNameJoin[{directory,"LIRE.nb"}]]/.{Closed->Open}
+FileNameJoin[{directory,"LISSAFIRE.pdf"}],
+Import[FileNameJoin[{directory,"LISSAFIRE.nb"}]]/.{Closed->Open}
 ];
 
 
