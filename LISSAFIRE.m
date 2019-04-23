@@ -39,7 +39,7 @@ End[];
 
 
 (* ::Input::Initialization:: *)
-Begin["`Private`"];$LISSAFIREtimestamp="Tue 23 Apr 2019 20:32:28";End[];
+Begin["`Private`"];$LISSAFIREtimestamp="Tue 23 Apr 2019 20:42:31";End[];
 
 
 (* ::Input::Initialization:: *)
@@ -63,8 +63,8 @@ $LISSAFIREcommit::OS="$LISSAFIREcommit has only been tested on Linux.";
 
 (* ::Input::Initialization:: *)
 Begin["`Private`"];
-$LISSAFIREcommit:=(If[$OperatingSystem!="Unix",Message[$LIREcommit::OS]];
-StringJoin[Riffle[ReadList["!cd "<>$LIREdirectory<>" && git log -1",String],{"\n"}]]);
+$LISSAFIREcommit:=(If[$OperatingSystem!="Unix",Message[$LISSAFIREcommit::OS]];
+StringJoin[Riffle[ReadList["!cd "<>$LISSAFIREdirectory<>" && git log -1",String],{"\n"}]]);
 End[];
 
 
@@ -233,4 +233,4 @@ EndPackage[];
 
 
 (* ::Input::Initialization:: *)
-DistributeDefinitions["LIRE`"];
+DistributeDefinitions["LISSAFIRE`"];

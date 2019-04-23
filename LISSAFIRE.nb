@@ -132,8 +132,8 @@ Cell["Version number", "Subsubsection",
   "version-section",ExpressionUUID->"7967eb43-4226-4d1a-9004-c579590a2692"],
 
 Cell["\<\
-The variable $LISSAFIREversion gives the version of the LISSAFIRE package currently \
-loaded, and its timestamp\
+The variable $LISSAFIREversion gives the version of the LISSAFIRE package \
+currently loaded, and its timestamp\
 \>", "Text",ExpressionUUID->"a28c2cef-44a8-4f88-a13e-dcfb21613da5"],
 
 Cell[BoxData[{
@@ -240,12 +240,12 @@ Cell["Timestamp", \
 Cell[BoxData[
  RowBox[{
   RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";", 
-  RowBox[{"$LISSAFIREtimestamp", "=", "\"\<Tue 23 Apr 2019 20:32:28\>\""}], 
+  RowBox[{"$LISSAFIREtimestamp", "=", "\"\<Tue 23 Apr 2019 20:42:31\>\""}], 
   ";", 
   RowBox[{"End", "[", "]"}], ";"}]], "Input",
  InitializationCell->True,
  CellTags->
-  "version-timestamp",ExpressionUUID->"a710743c-db4b-4743-880c-1e6f3e5b8f7e"]
+  "version-timestamp",ExpressionUUID->"3a76d159-5421-458c-8342-0d0c51f8d1ab"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1059,7 +1059,7 @@ NotebookEventActions->{{"MenuCommand", "Save"} :> (NotebookWrite[
       CellTags -> "version-timestamp"], None, AutoScroll -> False]; 
    NotebookSave[]), PassEventsDown -> True},
 WindowSize->{1536, 781},
-WindowMargins->{{0, Automatic}, {Automatic, 90}},
+WindowMargins->{{0, Automatic}, {Automatic, 120}},
 PrintingCopies->1,
 PrintingStartingPageNumber->1,
 PrintingPageRange->{Automatic, Automatic},
