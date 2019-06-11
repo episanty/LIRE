@@ -1,4 +1,4 @@
-﻿LISSAFIRE: Lissajous-figure Reconstruction for nonlinear polarization tomography of bichromatic fields
+﻿LISSAFIRE: Lissajous-Figure Reconstruction for nonlinear polarization tomography of bichromatic fields
 ====
 
 © Emilio Pisanty, 2019
