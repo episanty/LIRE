@@ -5,7 +5,7 @@
 
 LISSAFIRE is a Mathematica package for reconstructing the polarization Lissajous figures of bichromatic ω:2ω light-beam combinations, as described in the paper
 
- - Knotting fractional-order knots with the polarization state of light. E. Pisanty et al. [*Nature Photonics* **13**, 569 (2019)](https://dx.doi.org/10.1038/s41566-019-0450-2), [arXiv:1808.05193](https://arxiv.org/abs/1808.05193).
+ - Knotting fractional-order knots with the polarization state of light. E. Pisanty et al. [*Nature Photonics* **13**, 569 (2019)](https://doi.org/10.1038/s41566-019-0450-2), [arXiv:1808.05193](https://arxiv.org/abs/1808.05193).
 
 
 
